@@ -3,7 +3,7 @@ module github.com/wuflenso/refraction_plot
 go 1.18
 
 require (
-	github.com/wuflenso/refraction_model v1.0.2
+	github.com/wuflenso/refraction_model v1.0.3
 	gonum.org/v1/plot v0.12.0
 )
 
