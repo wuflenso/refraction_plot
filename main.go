@@ -30,7 +30,7 @@ var (
 
 func main() {
 
-	// Still O(N^2) we can optimize it later by applying parralelism
+	// Still O(n^2) we can optimize it later to O(n) by applying parralelism to the iterations
 
 	// Set parameters
 	// Convert angles from Degrees to Radians first
