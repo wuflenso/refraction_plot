@@ -96,17 +96,34 @@ func main() {
 	p.Y.Label.Text = "Y"
 	p.Add(plotter.NewGrid())
 
+	/*
+		rnd := rand.New(rand.NewSource(1))
+
+		pts := make(plotter.XYs, 2)
+		pts[0].X = 0
+		pts[0].Y = -1000
+		pts[1].X = getMax(xArrMaxes)
+		pts[1].Y = -1000
+		layers, err := plotter.NewLine(pts)
+		if err != nil {
+			log.Panic(err)
+		}
+
+		layers.FillColor = color.RGBA{R: uint8(rnd.Intn(255)), G: uint8(rnd.Intn(255)), B: uint8(rnd.Intn(255)), A: uint8(rnd.Intn(255))}
+		p.Add(layers)
+	*/
+
 	// plot layers
 	rnd := rand.New(rand.NewSource(1))
 
-	layer := layerThicknesses[1]
+	layer := 0.0
 	for i, thickness := range layerThicknesses {
 		if i == 0 {
 			pts := make(plotter.XYs, 2)
 			pts[0].X = 0
-			pts[0].Y = 0
+			pts[0].Y = layer
 			pts[1].X = getMax(xArrMaxes)
-			pts[1].Y = 0
+			pts[1].Y = layer
 			layers, err := plotter.NewLine(pts)
 			if err != nil {
 				log.Panic(err)
@@ -116,19 +133,22 @@ func main() {
 			p.Add(layers)
 		}
 
-		pts := make(plotter.XYs, 2)
-		pts[0].X = 0
-		pts[0].Y = layer
-		pts[1].X = getMax(xArrMaxes)
-		pts[1].Y = layer
-		layers, err := plotter.NewLine(pts)
-		if err != nil {
-			log.Panic(err)
-		}
+		if i > 0 {
 
-		layers.FillColor = color.RGBA{R: uint8(rnd.Intn(255)), G: uint8(rnd.Intn(255)), B: uint8(rnd.Intn(255)), A: uint8(rnd.Intn(255))}
-		p.Add(layers)
-		layer += thickness
+			pts := make(plotter.XYs, 2)
+			pts[0].X = 0
+			pts[0].Y = layer
+			pts[1].X = getMax(xArrMaxes)
+			pts[1].Y = layer
+			layers, err := plotter.NewLine(pts)
+			if err != nil {
+				log.Panic(err)
+			}
+
+			layers.FillColor = color.RGBA{R: uint8(rnd.Intn(255)), G: uint8(rnd.Intn(255)), B: uint8(rnd.Intn(255)), A: uint8(rnd.Intn(255))}
+			p.Add(layers)
+			layer += thickness
+		}
 
 	}
 
